@@ -33,3 +33,7 @@ def ensure_directory(path: Path) -> None:
 
 def change_extension(path: Path, new_extension: str) -> Path:
     return path.with_suffix(f".{new_extension}")
+
+
+def translated_path(path: Path, extension: str) -> Path:
+    return path.with_name(f"{path.stem}-translated.{extension}")

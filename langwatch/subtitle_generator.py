@@ -8,6 +8,14 @@ import srt
 from langwatch.translator import LLMTranslator
 
 
+def save_original_srt(subtitles: List[srt.Subtitle], filepath: Path) -> Path:
+    filepath.parent.mkdir(parents=True, exist_ok=True)
+    content = srt.compose(subtitles)
+    with open(filepath, "w", encoding="utf-8") as f:
+        f.write(content)
+    return filepath
+
+
 def generate_bilingual_srt(
     subtitles: List[srt.Subtitle],
     translations: List[str],

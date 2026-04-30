@@ -14,37 +14,43 @@ source_language: "auto"
 # Target language: your native language for translations and glosses (ISO 639-1 code).
 target_language: "en"
 
-# LLM settings for translation and analysis.
+# LLM settings. Define multiple APIs and switch between them with the "active" field
+# or the --llm command-line flag.
 llm:
-  # OpenAI-compatible API base URL.
-  # Examples:
-  #   OpenAI:    "https://api.openai.com/v1"
-  #   Ollama:    "http://localhost:11434/v1"
-  #   LM Studio: "http://localhost:1234/v1"
-  api_base: "http://localhost:11434/v1"
+  # Which API to use by default. Must match a key under "apis".
+  active: "ollama-local"
 
-  # API key (empty string for local models that don't require one).
-  api_key: ""
+  apis:
+    ollama-local:
+      api_base: "http://localhost:11434/v1"
+      api_key: ""
+      model: "llama3"
+      # Maximum context window size in tokens for this model.
+      # Used to auto-calculate batch sizes for API calls.
+      max_context_window: 8192
+      max_tokens_per_request: 4096
+      temperature: 0.3
+      max_retries: 2
 
-  # Model name (e.g. "gpt-4o", "llama3", "mistral").
-  model: "llama3"
+    # Example: OpenAI
+    # openai:
+    #   api_base: "https://api.openai.com/v1"
+    #   api_key: "sk-..."
+    #   model: "gpt-4o"
+    #   max_context_window: 128000
+    #   max_tokens_per_request: 16384
+    #   temperature: 0.3
+    #   max_retries: 2
 
-  max_tokens_per_request: 4096
-
-  # Lower temperature = more consistent/accurate translations.
-  temperature: 0.3
-
-  # Number of subtitle entries per translation API call.
-  translation_batch_size: 12
-
-  # Number of sentences per gloss generation API call.
-  gloss_batch_size: 20
-
-  # Number of vocabulary words per API call.
-  vocab_batch_size: 50
-
-  # Max retries on LLM response parse failure before falling back.
-  max_retries: 2
+    # Example: z.ai GLM
+    # zai-glm:
+    #   api_base: "https://open.bigmodel.cn/api/paas/v4"
+    #   api_key: "..."
+    #   model: "glm-5.1"
+    #   max_context_window: 200000
+    #   max_tokens_per_request: 40960
+    #   temperature: 0.3
+    #   max_retries: 2
 
 # Anki flashcard export settings.
 anki:
