@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "langwatch"
+version = "0.1.0"
+description = "Language learning video downloader with bilingual subtitles, gloss, and Anki export"
+requires-python = ">=3.10"
+dependencies = [
+    "yt-dlp>=2025.1.1",
+    "srt>=3.0.0",
+    "pyyaml>=6.0",
+    "openai>=1.0.0",
+    "rich>=13.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-mock>=3.12",
+]
+
+[project.scripts]
+langwatch = "langwatch.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["langwatch*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

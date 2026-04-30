@@ -1,0 +1,61 @@
+# LangWatch Configuration
+# Copy this file to config.yaml and adjust settings.
+
+# Directory where downloaded videos and generated files are saved.
+download_dir: "./downloads"
+
+# Maximum video resolution to download (e.g. 2160, 1080, 720, 480, 360).
+video_resolution: 720
+
+# Source language: the language of the video captions.
+# Use "auto" to detect from video metadata, or an ISO 639-1 code (e.g. "de", "es", "fr").
+source_language: "auto"
+
+# Target language: your native language for translations and glosses (ISO 639-1 code).
+target_language: "en"
+
+# LLM settings for translation and analysis.
+llm:
+  # OpenAI-compatible API base URL.
+  # Examples:
+  #   OpenAI:    "https://api.openai.com/v1"
+  #   Ollama:    "http://localhost:11434/v1"
+  #   LM Studio: "http://localhost:1234/v1"
+  api_base: "http://localhost:11434/v1"
+
+  # API key (empty string for local models that don't require one).
+  api_key: ""
+
+  # Model name (e.g. "gpt-4o", "llama3", "mistral").
+  model: "llama3"
+
+  max_tokens_per_request: 4096
+
+  # Lower temperature = more consistent/accurate translations.
+  temperature: 0.3
+
+  # Number of subtitle entries per translation API call.
+  translation_batch_size: 12
+
+  # Number of sentences per gloss generation API call.
+  gloss_batch_size: 20
+
+  # Number of vocabulary words per API call.
+  vocab_batch_size: 50
+
+  # Max retries on LLM response parse failure before falling back.
+  max_retries: 2
+
+# Anki flashcard export settings.
+anki:
+  # Set to true to generate Anki-importable CSV.
+  enabled: true
+
+  # Field separator: "tab" or "semicolon".
+  separator: "tab"
+
+  # Minimum number of times a word must appear in the transcript to be considered.
+  min_frequency: 2
+
+  # Maximum number of vocabulary cards to export.
+  max_words: 50
